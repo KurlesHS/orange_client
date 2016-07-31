@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="3rdparty" displayName="3rdparty" projectFiles="true">
+      <logicalFolder name="json" displayName="json" projectFiles="true">
+        <itemPath>3rdparty/json/json.hpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="SimpleSignal" projectFiles="true">
+        <itemPath>3rdparty/SimpleSignal/simplesignal.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="sol2" displayName="sol2" projectFiles="true">
+        <itemPath>3rdparty/sol2/sol2.hpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="test_files" displayName="test_files" projectFiles="true">
+      <logicalFolder name="lua" displayName="lua" projectFiles="true">
+        <itemPath>test_files/lua/test_00.lua</itemPath>
+        <itemPath>test_files/lua/test_01.lua</itemPath>
+        <itemPath>test_files/lua/test_02.lua</itemPath>
+        <itemPath>test_files/lua/test_03.lua</itemPath>
+        <itemPath>test_files/lua/test_04.lua</itemPath>
+        <itemPath>test_files/lua/test_05.lua</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Исходные файлы"
+                   projectFiles="true">
+      <logicalFolder name="ioc" displayName="ioc" projectFiles="true">
+      </logicalFolder>
+      <logicalFolder name="lua" displayName="lua" projectFiles="true">
+        <itemPath>lua/luascript.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="network" projectFiles="true">
+        <itemPath>network/tcpserver.cpp</itemPath>
+        <itemPath>network/tcpsocket.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="protocol" projectFiles="true">
+        <itemPath>protocol/command.cpp</itemPath>
+        <itemPath>protocol/iincommingcommand.cpp</itemPath>
+        <itemPath>protocol/protocolimpl.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="timer" displayName="timer" projectFiles="true">
+        <itemPath>timer/itimer.cpp</itemPath>
+        <itemPath>timer/timerfactory.cpp</itemPath>
+      </logicalFolder>
+      <itemPath>main.cpp</itemPath>
+      <itemPath>thread/threadregister.cpp</itemPath>
+      <itemPath>uuid.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Файлы заголовков"
+                   projectFiles="true">
+      <logicalFolder name="ioc" displayName="ioc" projectFiles="true">
+        <itemPath>ioc/resolver.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="lua" displayName="lua" projectFiles="true">
+        <itemPath>lua/luascript.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="network" projectFiles="true">
+        <itemPath>network/itransport.h</itemPath>
+        <itemPath>network/tcpserver.h</itemPath>
+        <itemPath>network/tcpsocket.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="protocol" projectFiles="true">
+        <itemPath>protocol/command.h</itemPath>
+        <itemPath>protocol/iincommingcommand.h</itemPath>
+        <itemPath>protocol/protocolimpl.h</itemPath>
+        <itemPath>protocol/startscriptcommand.cpp</itemPath>
+        <itemPath>protocol/startscriptcommand.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="timer" displayName="timer" projectFiles="true">
+        <itemPath>timer/itimer.h</itemPath>
+        <itemPath>timer/timerfactory.h</itemPath>
+      </logicalFolder>
+      <itemPath>endian.hpp</itemPath>
+      <itemPath>helpers.h</itemPath>
+      <itemPath>thread/threadregister.h</itemPath>
+      <itemPath>uuid.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Файлы ресурсов"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Файлы тестов"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1"
+                     displayName="Command parser test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/tst_commandparser.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f5"
+                     displayName="Endian test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/tst_endian.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f3"
+                     displayName="Resolver Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/tst_resolver.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2"
+                     displayName="Test Lua script"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/testtimerfactory.h</itemPath>
+        <itemPath>tests/tst_luascript.cpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Важные файлы"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>3rdparty</Elem>
+    <Elem>ioc</Elem>
+    <Elem>protocol</Elem>
+    <Elem>timer</Elem>
+    <Elem>lua</Elem>
+    <Elem>test_files</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <ccTool>
+          <standard>11</standard>
+          <incDir>
+            <pElem>3rdparty</pElem>
+            <pElem>3rdparty/sol2</pElem>
+            <pElem>/usr/include/</pElem>
+            <pElem>/usr/include/lua5.3</pElem>
+            <pElem>.</pElem>
+          </incDir>
+          <commandLine>-Wall -Wextra -Wpedantic</commandLine>
+          <warningLevel>2</warningLevel>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>-pthread -llua5.3 -lev -luuid -lcrypto </linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="3rdparty/SimpleSignal/simplesignal.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="3rdparty/json/json.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="3rdparty/sol2/sol2.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="endian.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles">
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>-lgtest</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f5">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f5</output>
+        </linkerTool>
+      </folder>
+      <item path="helpers.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ioc/resolver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lua/luascript.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lua/luascript.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="network/itransport.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="network/tcpserver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="network/tcpserver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="network/tcpsocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="network/tcpsocket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="protocol/command.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/command.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="protocol/iincommingcommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/iincommingcommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="protocol/protocolimpl.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/protocolimpl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="protocol/startscriptcommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/startscriptcommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_00.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_01.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_02.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_03.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_04.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_05.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/testtimerfactory.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/tst_commandparser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/tst_endian.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/tst_luascript.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/tst_resolver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="thread/threadregister.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="thread/threadregister.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="timer/itimer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="timer/itimer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="timer/timerfactory.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="timer/timerfactory.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="uuid.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="uuid.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>11</standard>
+          <incDir>
+            <pElem>3rdparty/sol2</pElem>
+            <pElem>/usr/include/</pElem>
+            <pElem>/usr/include/lua5.3</pElem>
+            <pElem>.</pElem>
+          </incDir>
+          <commandLine>-Wall -Wextra -Wpedantic</commandLine>
+          <warningLevel>2</warningLevel>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>-pthread -llua5.3 -lev -luuid -lcrypto </linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="3rdparty/SimpleSignal/simplesignal.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="3rdparty/json/json.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="3rdparty/sol2/sol2.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="endian.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <folder path="TestFiles">
+        <linkerTool>
+          <linkerLibItems>
+            <linkerOptionItem>-lgtest</linkerOptionItem>
+          </linkerLibItems>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f2">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f2</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f3">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f3</output>
+        </linkerTool>
+      </folder>
+      <folder path="TestFiles/f5">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f5</output>
+        </linkerTool>
+      </folder>
+      <item path="helpers.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ioc/resolver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="lua/luascript.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="lua/luascript.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="network/itransport.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="network/tcpserver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="network/tcpserver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="network/tcpsocket.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="network/tcpsocket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="protocol/command.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/command.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="protocol/iincommingcommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/iincommingcommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="protocol/protocolimpl.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/protocolimpl.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="protocol/startscriptcommand.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/startscriptcommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_00.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_01.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_02.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_03.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_04.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="test_files/lua/test_05.lua" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/testtimerfactory.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/tst_commandparser.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/tst_endian.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/tst_luascript.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="tests/tst_resolver.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="thread/threadregister.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="thread/threadregister.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="timer/itimer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="timer/itimer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="timer/timerfactory.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="timer/timerfactory.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="uuid.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="uuid.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
