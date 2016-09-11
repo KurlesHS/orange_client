@@ -149,8 +149,7 @@ bool TcpServer::isListening() const
 }
 
 std::shared_ptr<TcpSocket> TcpServer::nextPendingConnection()
-{
-    
+{    
     if (d->mPendingSockets.size()) {
         auto loop = ThreadRegister::loopForCurrentThread();
         if (loop.raw_loop) {

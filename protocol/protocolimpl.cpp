@@ -25,7 +25,6 @@ static constexpr int waitDataTimeout = 5000;
 class ProtocolImplPrivate
 {
 public:
-    std::shared_ptr<ITransport> mTransport;
     std::string onReadyReadConnection;
     std::string onDisconnectConnection;
     std::string mUserName;
@@ -35,18 +34,11 @@ public:
 };
 
 ProtocolImpl::ProtocolImpl(std::shared_ptr<ITransport> transport) :
+    IProtocol(transport),
     d(new ProtocolImplPrivate)
 {
     d->mUserName = "unknown user name";
     d->mTimer = Resolver::resolveDi<TimerFactory>()->getTimer(waitDataTimeout);
-    d ->mTransport = transport;
-    d->onDisconnectConnection = d->mTransport->connect_disconnected([this]() {
-        onDisconnected();
-    });
-
-    d->onReadyReadConnection = d->mTransport->connect_readyRead([this]() {
-        onReadyRead();
-    });
 }
 
 ProtocolImpl::~ProtocolImpl()
@@ -57,48 +49,47 @@ ProtocolImpl::~ProtocolImpl()
 void ProtocolImpl::onDisconnected()
 {
     std::stringstream ss;
-    ss << "disconnected from " << d->mTransport->peerAddress() <<
+    ss << "disconnected from " << transport()->peerAddress() <<
             " (" << d->mUserName << ")";
 
     emit_logMessage(ss.str());
     emit_disconnected(this);
 }
 
-void ProtocolImpl::onReadyRead()
+void ProtocolImpl::dataReceived(const vector<char>& data)
+{
+    stopTimeoutTimer();
+    auto newSize = data.size() + d->mBuffer.size();
+    d->mBuffer.reserve(newSize);
+    d->mBuffer.insert(d->mBuffer.end(), data.begin(), data.end());
+    switch (d->mCommandParser.parse(d->mBuffer.data(), d->mBuffer.size())) {
+        case CommandParser::Result::Error:
+            handleErrorCommand();
+            break;
+        case CommandParser::Result::Incomplete:
+            handleIncompleteCommand();
+            break;
+        case CommandParser::Result::Ok:
+            handleOkCommand();
+            break;
+    }
+}
+
+void ProtocolImpl::onConnected()
 {
 
-    const int bytesCount = d->mTransport->bytesAvailable();
-    if (bytesCount > 0) {
-        stopTimeoutTimer();
-        int currentOffset = d->mBuffer.size();
-        // читаем данные
-        d->mBuffer.resize(currentOffset + bytesCount);
-        d->mTransport->read(&d->mBuffer[currentOffset], bytesCount);
-        // парсим данные
-        switch (d->mCommandParser.parse(d->mBuffer.data(), d->mBuffer.size())) {
-            case CommandParser::Result::Error:
-                handleErrorCommand();
-                break;
-            case CommandParser::Result::Incomplete:
-                handleIncompleteCommand();
-                break;
-            case CommandParser::Result::Ok:
-                handleOkCommand();
-                break;
-        }
-    }
 }
 
 void ProtocolImpl::handleErrorCommand()
 {
     // при ошибке - рвём соединение и информируем об этом внешний мир
     std::stringstream ss;
-    ss << "received mailformed (wrong) message from " << d->mTransport->peerAddress() <<
+    ss << "received mailformed (wrong) message from " << transport()->peerAddress() <<
             " (" << d->mUserName << ")";
 
     emit_logMessage(ss.str());
 
-    d->mTransport->close();
+    transport()->close();
 
 }
 
@@ -138,22 +129,22 @@ void ProtocolImpl::sendResponse(IIncommingCommand *cmd)
     };
 }
 
-    void ProtocolImpl::onWaitDataTimeout()
-    {
-        // при таймауте рвём соединение
-        std::stringstream ss;
-        ss << "timeout while waiting data from " << d->mTransport->peerAddress() <<
-                " (" << d->mUserName << ")";
+void ProtocolImpl::onWaitDataTimeout()
+{
+    // при таймауте рвём соединение
+    std::stringstream ss;
+    ss << "timeout while waiting data from " << transport()->peerAddress() <<
+            " (" << d->mUserName << ")";
 
-        emit_logMessage(ss.str());
+    emit_logMessage(ss.str());
 
-        d->mTransport->close();
+    transport()->close();
 
-}   
+}
 
 void ProtocolImpl::handleSendAuthErrorRsponse(IIncommingCommand* cmd)
 {
-    
+
 }
 
 void ProtocolImpl::handleSendCommandErrorResponse(IIncommingCommand* cmd)
@@ -165,4 +156,3 @@ void ProtocolImpl::handleSendOkResponse(IIncommingCommand* cmd)
 {
 
 }
- 

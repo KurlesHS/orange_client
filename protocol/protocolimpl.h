@@ -21,21 +21,26 @@
 
 #include "iincommingcommand.h"
 
+#include "network/iprotocol.h"
+
 class ProtocolImplPrivate;
 
 class ITransport;
 
-class ProtocolImpl {
+class ProtocolImpl : public IProtocol {
 public:
 
     ProtocolImpl(std::shared_ptr<ITransport> transport);
     virtual ~ProtocolImpl();
 
     void sendResponse(IIncommingCommand *cmd);
+    
+protected:
+    virtual void dataReceived(const vector<char> &data) override;
+    virtual void onConnected() override;
+    virtual void onDisconnected() override;
 
 private:
-    void onReadyRead();
-    void onDisconnected();
     void onWaitDataTimeout();
 
 
@@ -59,7 +64,6 @@ private:
     declare_signal(connected, void(ProtocolImpl*, const std::string &userName));
     declare_signal(disconnected, void(ProtocolImpl*));
     declare_signal(logMessage, void(const std::string &message));
-
 };
 
 #endif /* PROTOCOLIMPL_H */

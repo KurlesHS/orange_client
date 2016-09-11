@@ -32,6 +32,7 @@
       </logicalFolder>
       <logicalFolder name="f2" displayName="network" projectFiles="true">
         <itemPath>network/tcpserver.cpp</itemPath>
+        <itemPath>network/tcpserverendpoint.cpp</itemPath>
         <itemPath>network/tcpsocket.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="protocol" projectFiles="true">
@@ -57,13 +58,19 @@
         <itemPath>lua/luascript.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="network" projectFiles="true">
+        <itemPath>network/iprotocol.cpp</itemPath>
+        <itemPath>network/iprotocol.h</itemPath>
+        <itemPath>network/iprotocolfactory.h</itemPath>
         <itemPath>network/itransport.h</itemPath>
         <itemPath>network/tcpserver.h</itemPath>
+        <itemPath>tcpserverendpoint.h</itemPath>
         <itemPath>network/tcpsocket.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="protocol" projectFiles="true">
         <itemPath>protocol/command.h</itemPath>
         <itemPath>protocol/iincommingcommand.h</itemPath>
+        <itemPath>protocol/protocolfactory.cpp</itemPath>
+        <itemPath>protocol/protocolfactory.h</itemPath>
         <itemPath>protocol/protocolimpl.h</itemPath>
         <itemPath>protocol/startscriptcommand.cpp</itemPath>
         <itemPath>protocol/startscriptcommand.h</itemPath>
@@ -241,11 +248,19 @@
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="network/iprotocol.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="network/iprotocol.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="network/iprotocolfactory.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="network/itransport.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="network/tcpserver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="network/tcpserver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="network/tcpserverendpoint.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="network/tcpsocket.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -259,6 +274,10 @@
       </item>
       <item path="protocol/iincommingcommand.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="protocol/protocolfactory.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/protocolfactory.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="protocol/protocolimpl.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="protocol/protocolimpl.h" ex="false" tool="3" flavor2="0">
@@ -266,6 +285,8 @@
       <item path="protocol/startscriptcommand.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="protocol/startscriptcommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tcpserverendpoint.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_files/lua/test_00.lua" ex="false" tool="3" flavor2="0">
       </item>
@@ -428,11 +449,19 @@
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="network/iprotocol.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="network/iprotocol.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="network/iprotocolfactory.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="network/itransport.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="network/tcpserver.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="network/tcpserver.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="network/tcpserverendpoint.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="network/tcpsocket.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -446,6 +475,10 @@
       </item>
       <item path="protocol/iincommingcommand.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="protocol/protocolfactory.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="protocol/protocolfactory.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="protocol/protocolimpl.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="protocol/protocolimpl.h" ex="false" tool="3" flavor2="0">
@@ -453,6 +486,8 @@
       <item path="protocol/startscriptcommand.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="protocol/startscriptcommand.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tcpserverendpoint.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="test_files/lua/test_00.lua" ex="false" tool="3" flavor2="0">
       </item>
