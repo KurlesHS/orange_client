@@ -12,8 +12,10 @@
  */
 
 #include "protocolimpl.h"
-#include "network/itransport.h"
 #include "command.h"
+
+#include "network/itransport.h"
+#include "uuid.h"
 
 #include <ioc/resolver.h>
 #include <timer/timerfactory.h>
@@ -28,17 +30,22 @@ public:
     std::string onReadyReadConnection;
     std::string onDisconnectConnection;
     std::string mUserName;
+    std::string mSessionId;
     ITimerSharedPtr mTimer;
     CommandParser mCommandParser;
-    std::vector<char> mBuffer;
+    std::vector<char> mBuffer;    
+    uint64_t mSequenceNum;
 };
 
 ProtocolImpl::ProtocolImpl(std::shared_ptr<ITransport> transport) :
     IProtocol(transport),
     d(new ProtocolImplPrivate)
 {
-    d->mUserName = "unknown user name";
+    d->mUserName;
     d->mTimer = Resolver::resolveDi<TimerFactory>()->getTimer(waitDataTimeout);
+    d->mSessionId = Uuid::createUuid().toString();
+    d->mSequenceNum = 0;
+    
 }
 
 ProtocolImpl::~ProtocolImpl()
@@ -77,7 +84,10 @@ void ProtocolImpl::dataReceived(const vector<char>& data)
 
 void ProtocolImpl::onConnected()
 {
-
+    Command cmd;
+    cmd.command = 0x0000;
+    cmd.sequenceNum = d->mSequenceNum++;
+    
 }
 
 void ProtocolImpl::handleErrorCommand()
@@ -110,8 +120,16 @@ void ProtocolImpl::handleIncompleteCommand()
 }
 
 void ProtocolImpl::handleOkCommand()
-{
-    // 
+{    
+    auto cmd = d->mCommandParser.cmd();
+    // удаляем 
+    if (cmd.commandTotalLen() >= d->mBuffer.size()) {
+        d->mBuffer.clear();
+    } else {
+        d->mBuffer.erase(d->mBuffer.begin(), d->mBuffer.begin() + cmd.commandTotalLen());
+    }
+    
+    
 }
 
 void ProtocolImpl::sendResponse(IIncommingCommand *cmd)

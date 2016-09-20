@@ -22,8 +22,6 @@ using namespace std;
 
 class ProtocolImpl;
 
-class ProtocolHolder;
-
 class ProtocolFactory : public IProtocolFactory {
 public:
 
@@ -35,8 +33,6 @@ public:
 
 private:
     list<shared_ptr<ProtocolImpl>> mActiveProtocols;
-    friend class ProtocolHolder;
-
 };
 
 #endif /* PROTOCOLFACTORY_H */

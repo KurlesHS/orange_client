@@ -43,7 +43,6 @@ protected:
 private:
     void onWaitDataTimeout();
 
-
     void handleOkCommand();
     void handleErrorCommand();
     void handleIncompleteCommand();

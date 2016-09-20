@@ -39,9 +39,7 @@ void ProtocolFactory::onDisconnected(ProtocolImpl* protocol)
     protocol->disconnect_disconnected();
     mActiveProtocols.remove_if([protocol](shared_ptr<ProtocolImpl> compare) {
         return protocol == compare.get();
-    });
-    
-    mActiveProtocols.remove(protocol);
+    });    
 }
 
 
