@@ -21,11 +21,11 @@
 using namespace std;
 
 class ProtocolImpl;
-
+class AuthManager;
 class ProtocolFactory : public IProtocolFactory {
 public:
 
-    ProtocolFactory();
+    ProtocolFactory(AuthManager *authManager);
     virtual ~ProtocolFactory();
     shared_ptr<IProtocol> buildProtocol(shared_ptr<ITransport> transport) override;
     
@@ -33,6 +33,7 @@ public:
 
 private:
     list<shared_ptr<ProtocolImpl>> mActiveProtocols;
+    AuthManager *mAuthManager;
 };
 
 #endif /* PROTOCOLFACTORY_H */

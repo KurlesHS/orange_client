@@ -15,25 +15,39 @@
 #define IOUTGOINGCOMMAND_H
 
 #include <stdint.h>
+
 #include <vector>
+#include <chrono>
 
 using namespace std;
 
 class IOutgoingCommand {
 public:
+
     enum class Result {
         Ok,
         Timeout
     };
     IOutgoingCommand();
     virtual ~IOutgoingCommand();
-    
-    virtual uint16_t command() const;
-    virtual vector<char> commandData() const;
-    
-    virtual void onResult()
-    
+
+    virtual uint16_t command() const = 0;
+    virtual vector<char> commandData() const = 0;
+
+    virtual bool isNeedCheckAuth() const;
+    virtual void onResult();
+
+    uint64_t sequenceNum() const;
+    void setSequenceNum(const uint64_t seq);
+
+    chrono::system_clock::time_point sendingTime() const;
+    void setSendingTime(chrono::system_clock::time_point mSendingTime);
+
+
 private:
+    uint64_t mSequenceNum;
+    chrono::system_clock::time_point mSendingTime;
+
 
 };
 

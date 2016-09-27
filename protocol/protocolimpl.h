@@ -22,18 +22,22 @@
 #include "iincommingcommand.h"
 
 #include "network/iprotocol.h"
+#include "ioutgoingcommand.h"
 
 class ProtocolImplPrivate;
 
 class ITransport;
+class IOutgoingCommand;
+class AuthManager;
 
 class ProtocolImpl : public IProtocol {
 public:
 
-    ProtocolImpl(std::shared_ptr<ITransport> transport);
+    ProtocolImpl(std::shared_ptr<ITransport> transport, AuthManager *authManager);
     virtual ~ProtocolImpl();
 
     void sendResponse(IIncommingCommand *cmd);
+    void addCommand(shared_ptr<IOutgoingCommand> cmd);
     
 protected:
     virtual void dataReceived(const vector<char> &data) override;
@@ -53,6 +57,7 @@ private:
 
     void startTimeoutTimer();
     void stopTimeoutTimer();
+        
 private:
     friend class ProtocolImplPrivate;
     ProtocolImplPrivate *d;

@@ -27,6 +27,11 @@
 #include "network/tcpserver.h"
 #include "network/tcpsocket.h"
 
+#include "tcpserverendpoint.h"
+#include "protocol/protocolfactory.h"
+#include "auth/authmanager.h"
+#include "mainhandler.h"
+
 using namespace std;
 using namespace chrono;
 #define lock_mutex() lock_guard<mutex> locker(mMutex);
@@ -164,8 +169,10 @@ int main(int argc, char** argv)
         cout << "test signals" << endl;
     });
     s.emit();
+    
+    MainHandler m;
+    m.start();
 
-    mainLoop.ref();
     mainLoop.run();
     return 0;
 }

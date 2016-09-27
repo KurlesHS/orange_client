@@ -15,8 +15,10 @@
 #include "protocolimpl.h"
 #include "network/itransport.h"
 
-ProtocolFactory::ProtocolFactory()
+ProtocolFactory::ProtocolFactory(AuthManager *authManager) :
+    mAuthManager(authManager)
 {
+    
 }
 
 ProtocolFactory::~ProtocolFactory()
@@ -25,7 +27,7 @@ ProtocolFactory::~ProtocolFactory()
 
 shared_ptr<IProtocol> ProtocolFactory::buildProtocol(shared_ptr<ITransport> transport)
 {
-    shared_ptr<ProtocolImpl> retVal = make_shared<ProtocolImpl>(transport);
+    shared_ptr<ProtocolImpl> retVal = make_shared<ProtocolImpl>(transport, mAuthManager);
 
     retVal->connect_disconnected([this](ProtocolImpl * protocol) {
         onDisconnected(protocol);
@@ -39,7 +41,7 @@ void ProtocolFactory::onDisconnected(ProtocolImpl* protocol)
     protocol->disconnect_disconnected();
     mActiveProtocols.remove_if([protocol](shared_ptr<ProtocolImpl> compare) {
         return protocol == compare.get();
-    });    
+    });
 }
 
 
