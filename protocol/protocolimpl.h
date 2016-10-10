@@ -35,13 +35,14 @@ public:
 
     ProtocolImpl(std::shared_ptr<ITransport> transport, AuthManager *authManager);
     virtual ~ProtocolImpl();
+    
+    virtual void onConnected() override;
 
     void sendResponse(IIncommingCommand *cmd);
     void addCommand(shared_ptr<IOutgoingCommand> cmd);
     
 protected:
     virtual void dataReceived(const vector<char> &data) override;
-    virtual void onConnected() override;
     virtual void onDisconnected() override;
 
 private:

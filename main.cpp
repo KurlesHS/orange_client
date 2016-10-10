@@ -31,6 +31,7 @@
 #include "protocol/protocolfactory.h"
 #include "auth/authmanager.h"
 #include "mainhandler.h"
+#include "ioc/resolver.h"
 
 using namespace std;
 using namespace chrono;
@@ -114,11 +115,18 @@ int main(int argc, char** argv)
     (void)argc;
     (void)argv;
 
+
+    ev::default_loop mainLoop;
+    ThreadRegister::registerThread(std::this_thread::get_id(), mainLoop);
+    di_register_type(ITimerFactory, TimerFactory,);
+    MainHandler m;
+    m.start();
+    
+#if 0 
     TestThread t;
 
     t.start();
-
-    ev::default_loop mainLoop;
+    
 
     ev::timer timer;
     timer.set(mainLoop);
@@ -129,7 +137,7 @@ int main(int argc, char** argv)
     std::weak_ptr<int> weak(shared);
     std::weak_ptr<int> weak2 = weak;
 
-    ThreadRegister::registerThread(std::this_thread::get_id(), mainLoop);
+    
     TimerFactory TFactory;
     auto sharedTimer = TFactory.getTimer(500);
     sharedTimer->connect_timeout([]() {
@@ -169,9 +177,8 @@ int main(int argc, char** argv)
         cout << "test signals" << endl;
     });
     s.emit();
+#endif
     
-    MainHandler m;
-    m.start();
 
     mainLoop.run();
     return 0;

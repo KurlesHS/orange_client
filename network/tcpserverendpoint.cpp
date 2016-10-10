@@ -18,6 +18,7 @@
 #include "network/tcpserver.h"
 #include "network/tcpsocket.h"
 #include "network/iprotocolfactory.h"
+#include "iprotocol.h"
 
 TcpServerEndpoint::TcpServerEndpoint(IProtocolFactory *factory) :
     mServer(new TcpServer(ThreadRegister::loopForCurrentThread())),
@@ -44,6 +45,7 @@ void TcpServerEndpoint::onNewConnection()
         auto tcpSocket = mServer->nextPendingConnection();
         if (tcpSocket) {
             mFactory->buildProtocol(tcpSocket);
+            
         }
     }
 }

@@ -93,7 +93,7 @@ ProtocolImpl::ProtocolImpl(std::shared_ptr<ITransport> transport, AuthManager *a
 {
     d->q = this;
     d->mAuthManager = authManager;
-    d->mTimer = Resolver::resolveDi<TimerFactory>()->getTimer(waitDataTimeout);
+    d->mTimer = Resolver::resolveDi<ITimerFactory>()->getTimer(waitDataTimeout);
     d->mSessionId = Uuid::createUuid().toString();
     d->mSequenceNum = 0;
     d->mIsAuthorized = false;
@@ -107,10 +107,16 @@ ProtocolImpl::~ProtocolImpl()
 
 void ProtocolImpl::onDisconnected()
 {
+    printf("11\n");
+    fflush(stdout);
+    static int c = 0;
+    c++;
     std::stringstream ss;
-    ss << "disconnected from " << transport()->peerAddress() <<
+    auto peerAddress = transport()->peerAddress();
+    /*
+    ss << "disconnected from " << peerAddress <<
             " (" << d->mUserName << ")";
-
+*/
     emit_logMessage(ss.str());
     emit_disconnected(this);
 }

@@ -11,6 +11,8 @@
  * Created on 12 сентября 2016 г., 0:28
  */
 
+#include <iostream>
+
 #include "protocolfactory.h"
 #include "protocolimpl.h"
 #include "network/itransport.h"
@@ -29,19 +31,23 @@ shared_ptr<IProtocol> ProtocolFactory::buildProtocol(shared_ptr<ITransport> tran
 {
     shared_ptr<ProtocolImpl> retVal = make_shared<ProtocolImpl>(transport, mAuthManager);
 
+    
     retVal->connect_disconnected([this](ProtocolImpl * protocol) {
         onDisconnected(protocol);
-    });
-
+    });        
+    
+    mActiveProtocols.push_back(retVal);
+    retVal->onConnected();
     return retVal;
 }
 
 void ProtocolFactory::onDisconnected(ProtocolImpl* protocol)
 {
-    protocol->disconnect_disconnected();
+    //protocol->disconnect_disconnected();
     mActiveProtocols.remove_if([protocol](shared_ptr<ProtocolImpl> compare) {
         return protocol == compare.get();
     });
+    cout << mActiveProtocols.size() << endl;
 }
 
 

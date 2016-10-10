@@ -18,6 +18,7 @@ MainHandler::MainHandler() :
     mFactory(&mAuthManager),
     mServer(&mFactory)
 {
+    mAuthManager.addUser("admin", "admin");
 }
 
 MainHandler::~MainHandler()

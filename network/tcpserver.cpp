@@ -64,7 +64,7 @@ public:
         
     }
     
-        bool startListen(int port)
+    bool startListen(int port)
     {
         if (mServerId >= 0) {
             // уже слушаем порт

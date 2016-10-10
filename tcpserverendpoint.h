@@ -15,9 +15,10 @@
 #define TCPSERVERENDPOINT_H
 
 #include <stdint.h>
-
+#include <memory>
 class IProtocolFactory;
 class TcpServer;
+class IProtocol;
 
 class TcpServerEndpoint {
 public:
@@ -32,7 +33,7 @@ private:
 private:
     TcpServer *mServer;
     IProtocolFactory *mFactory;
-
+    std::shared_ptr<IProtocol> mProtocol;
 };
 
 #endif /* TCPSERVERENDPOINT_H */

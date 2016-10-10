@@ -23,6 +23,10 @@
 
 #include <ev++.h>
 
+#include <iostream>
+
+using namespace std;
+
 class TcpSocketPrivate
 {
 public:
@@ -41,8 +45,12 @@ public:
         mReadOffset(0),
         mWriteLen(0)
     {
+        try {
         mReadBuff.resize(0x1000);
         mWriteBuff.resize(0x1000);
+        } catch (...) {
+            cout << "!!!" << endl;
+        }
         mReadWriteWatcher.set(loop);
         mReadWriteWatcher.set<TcpSocketPrivate, &TcpSocketPrivate::readWriteCallback>(this);
         if (socketId >= 0) {
@@ -96,6 +104,7 @@ public:
 
     void readCallback()
     {
+        // кол-во байт, нас ожидающих
         int count;
         ioctl(mSocketId, FIONREAD, &count);
 
@@ -174,7 +183,7 @@ public:
         }
         memcpy(&mWriteBuff[mWriteLen], buff, len);
         mWriteLen += len;
-        mReadWriteWatcher.set(ev::READ | ev::WRITE);
+        mReadWriteWatcher.set(ev::WRITE);
 
         return len;
     }
@@ -198,7 +207,7 @@ std::string TcpSocket::peerAddress() const
 
 TcpSocket::~TcpSocket()
 {
-    disconnect_disconnected();
+    //disconnect_disconnected();
     close();    
     delete d;
 }

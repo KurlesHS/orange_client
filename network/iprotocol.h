@@ -27,12 +27,12 @@ class IProtocol {
 public:
     IProtocol(shared_ptr<ITransport> transport);
     virtual ~IProtocol();
-
     ITransport *transport() const;
+    
+    virtual void onConnected() = 0;
 
 protected:
-    virtual void dataReceived(const vector<char> &data) = 0;
-    virtual void onConnected() = 0;
+    virtual void dataReceived(const vector<char> &data) = 0;    
     virtual void onDisconnected() = 0;
 
 private:
